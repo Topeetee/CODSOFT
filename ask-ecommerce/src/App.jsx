@@ -3,6 +3,8 @@ import React from 'react'
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Signup from "./pages/Signup";
+import Login from "./pages/Login"
+import Order from "./pages/order";
 
 const App = () => {
   return (
@@ -11,6 +13,8 @@ const App = () => {
         <Route path="/" element={<Home/>}/>
         <Route path="/Products" element={<Products/>}/>
         <Route path="/register" element={<Signup/>}/>
+        <Route path="/Login" element={<Login/>}/>
+        <Route path="/Order" element={<Order/>}/>
     </Routes>
    </BrowserRouter>
   )

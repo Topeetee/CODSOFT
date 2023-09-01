@@ -10,7 +10,7 @@ export default {
   plugins: [],
   corePlugins: {
     // Example of defining custom utility classes
-    flexRow : 'flex flex-row justify-center text-center',
+
     
   },
 }

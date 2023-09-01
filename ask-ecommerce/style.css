@@ -36,6 +36,21 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+@layer components{
+.pointer{
+  cursor:pointer
+}
+.button-color{
+  width: 7rem;
+  background: black;
+  border-radius: 2px;
+  color: white;
+}
+.a-link{
+  border-bottom: 1px solid #1a1a1a;
+  width: max-content;
+}
+}
 /* . */
 @media (prefers-color-scheme: light) {
   :root {
