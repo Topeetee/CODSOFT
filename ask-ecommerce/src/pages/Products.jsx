@@ -3,7 +3,9 @@ import Navbar from '../component/Navbar'
 
 const Products = () => {
   return (
-    <div><Navbar/></div>
+    <div><Navbar/>
+      
+    </div>
   )
 }
 

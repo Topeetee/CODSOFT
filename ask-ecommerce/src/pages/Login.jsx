@@ -3,7 +3,7 @@ import Navbar from '../component/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -28,46 +28,45 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-     
         navigate('./order.jsx');
       } else {
         setErrorMessage(error.message);
       }
     } catch (error) {
-        setErrorMessage(error.message);
+      setErrorMessage(error.message);
     }
   };
 
   return (
     <div>
       <Navbar />
-      <div className="container mt-44 flex justify-center flex-col text-center">
-      {errorMessage && (
-        <div className="text-red-500 mb-4">{errorMessage}</div>
-      )}
-        <h2 className=' text-center text-3xl font-sans'>Login</h2>
+      <div className="container mt-44 flex justify-center items-center flex-col text-center">
+        {errorMessage && (
+          <div className="text-red-500 mb-4">{errorMessage}</div>
+        )}
+        <h2 className="text-center text-3xl font-sans">Login</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4 mt-5 ">
+          <div className="mb-4 mt-5">
             <input
               type="text"
               id="username"
               name="username"
-              className="form-control  border-2 p-4 w-96"
+              className="form-control border-2 p-4 w-96"
               value={formData.username}
               onChange={handleInputChange}
-              placeholder='Username'
+              placeholder="Username"
               required
             />
           </div>
-          <div className="mb-4 ">
+          <div className="mb-4">
             <input
               type="password"
               id="password"
               name="password"
-              className="form-control border-2 p-4 w-96 mb-5 mt-"
+              className="form-control border-2 p-4 w-96 mb-5"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder='Password'
+              placeholder="Password"
               required
             />
           </div>
@@ -75,7 +74,10 @@ const Login = () => {
             Login
           </button>
         </form>
-        <Link to="/register"><a className='a-link'>Signup</a></Link>
+
+        <Link to="/register">
+          <a className="a-link">Signup</a>
+        </Link>
       </div>
     </div>
   );

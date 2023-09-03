@@ -36,7 +36,19 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
 @layer components{
+  html {
+    height: 100%;
+  }
+  p{
+    color: rgb(76, 81, 82);
+    font-size: 1.5rem;
+  }
+
+  .border-error{
+     border: '1px solid red';
+  }
 .pointer{
   cursor:pointer
 }
@@ -49,6 +61,39 @@ button:focus-visible {
 .a-link{
   border-bottom: 1px solid #1a1a1a;
   width: max-content;
+}
+.button-color2{
+  background: transparent;
+  border-radius: 2px;
+  padding: 1rem 1.5rem;
+  font-size: 2em;
+  border: 2px solid black;
+  color: black;
+}
+.fll{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+/* body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; } */
+#cot{
+  height: 100vh;
+  width: 100%;
+  background-image: url('/image-placeholder.jpg'); 
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: fixed;
+}
+#app {
+  position: relative;
+  overflow: auto; 
+  height: 100%; 
 }
 }
 /* . */
