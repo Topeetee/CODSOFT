@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const CartPage = () => {
     const { cart, removeFromCart } = useCart();
-    const handleRemoveCart = (item) => {
+    const handleRemoveCart = (productId) => {
         console.log("remove")
-        removeFromCart(item)
+        removeFromCart(productId)
     }
-    // Check if the cart is empty
+
     const isEmpty = cart.length === 0;
 
     return (
@@ -33,7 +33,7 @@ const CartPage = () => {
                                     <h3 className=''>{item.name}</h3>
                                     <p>Price: ${item.price.toFixed(2)}</p>
                                 </div>
-                                <button onClick={() =>  handleRemoveCart(item)}>Remove from Cart</button>
+                                <button onClick={() =>  handleRemoveCart(item.id)}>Remove from Cart</button>
                             </li>
                         ))}
                     </ul>

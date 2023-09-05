@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import products from '../../src/product'; // Import your product data
 import ProductCard from './ProductCard'; // Import the ProductCard component
 
-const ProductList = ({ cart }) => {
+const ProductList = ({ cart ,limit,products}) => {
   const [cartItems, setCartItems] = useState([]);
+  const items = limit ? products.slice(0, limit) : products;
 
-  // Define the addToCart function to add items to the cart
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
 
   return (
     <div className="product-list flex flex-row flex-wrap justify-between">
-      {products.map((product) => (
+      {items.map((product) => (
         <ProductCard key={product.id} product={product} addToCart={addToCart} />
       ))}
     </div>

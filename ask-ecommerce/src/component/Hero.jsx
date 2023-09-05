@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ProductList from './productlist'
+import ProductList from './Productlist';
 
 
 
 const Hero = () => {
+  const numberOfProductsToShow = 4;
   return (
+    
     <div >
       <div className='h-full ml-24 mr-24 mt-36' style={{ marginTop: 'calc(6rem - 10px)' }}>
         <h2 className='text-center font-sans text-5xl pt-64'>Industrial design meets fashion.</h2>
@@ -17,7 +19,7 @@ const Hero = () => {
         <h2 className=' text-4xl'>Obsessive Attention. Intelligent Effort.</h2>
         <p className=' pt-9 pb-28'>Functional handbags made of luxurious materials to improve people's lives in small but mighty ways.</p>
         </div>
-          <ProductList/>
+          <ProductList limit={numberOfProductsToShow}/>
       </div>
     </div>
   )
