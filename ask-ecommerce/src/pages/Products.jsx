@@ -16,10 +16,10 @@ const Products = () => {
   //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
   // );
   return (
-    <div className='  fll scroll-smooth'>
+    <div className='  fll scroll-smooth '>
       <div>
       <Navbar />
-        <div className=" mt-28">
+        <div className=" mt-28 ml-24 mr-24">
         <ProductList />
         </div>
       </div>

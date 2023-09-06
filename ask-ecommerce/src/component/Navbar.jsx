@@ -5,7 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import { useCart } from '../../hooks/cartContext';
 const Navbar = () => {
   const navigate = useNavigate();
   const redirectToLogin = () => {
@@ -14,6 +14,8 @@ const Navbar = () => {
   const redirectToCart = () => {
     navigate('/Cart');
   };
+  const { cartItemCount } = useCart();
+  console.log(cartItemCount)
 
   const handleSearchInputChange = (event) => {
     const dat = event.target.value;
@@ -48,10 +50,16 @@ const Navbar = () => {
             </Link>
           </div>
           <div className=' flex gap-6'>
-          <BsPersonCircle onClick={redirectToLogin} size={22} className="pointer" />
-          <FaShoppingCart onClick={redirectToCart} size={22} className="pointer" />
+            <BsPersonCircle onClick={redirectToLogin} size={22} className="pointer" />
+            <div className=' relative'>
+              <FaShoppingCart onClick={redirectToCart} size={22} className="pointer relative"/>
+              <span className="cart-item-count bottom-2 -right-2 bg-black text-white font-bold text-xs px-1 rounded-full absolute"  style={{ color: 'white' }}>
+                  {cartItemCount}
+                </span>
+            </div>
+
           </div>
-  
+     
         </div>
       </div>
     </div>

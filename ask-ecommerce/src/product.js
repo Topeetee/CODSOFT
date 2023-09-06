@@ -14,6 +14,27 @@ const products = [
       description: 'Vestibulum rhoncus eros ut libero vehicula, non posuere lorem placerat.',
       Image: "/image-placeholder.jpg"
     },
+    {
+      id: 3,
+      name: 'Product 3',
+      price: 29.99,
+      description: 'Vestibulum rhoncus eros ut libero vehicula, non posuere lorem placerat.',
+      Image: "/image-placeholder.jpg"
+    },
+    {
+      id: 4,
+      name: 'Product 4',
+      price: 29.99,
+      description: 'Vestibulum rhoncus eros ut libero vehicula, non posuere lorem placerat.',
+      Image: "/image-placeholder.jpg"
+    },
+    {
+      id: 5,
+      name: 'Product 5',
+      price: 29.99,
+      description: 'Vestibulum rhoncus eros ut libero vehicula, non posuere lorem placerat.',
+      Image: "/image-placeholder.jpg"
+    },
 
   ];
   

@@ -19,7 +19,7 @@ const Hero = () => {
         <h2 className=' text-4xl'>Obsessive Attention. Intelligent Effort.</h2>
         <p className=' pt-9 pb-28'>Functional handbags made of luxurious materials to improve people's lives in small but mighty ways.</p>
         </div>
-          <ProductList limit={numberOfProductsToShow}/>
+          <ProductList limit={numberOfProductsToShow} />
       </div>
     </div>
   )
