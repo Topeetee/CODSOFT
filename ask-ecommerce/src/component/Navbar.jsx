@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import { FaShoppingCart } from 'react-icons/fa';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const Navbar = ({products}) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const redirectToLogin = () => {
     navigate('/Login');
@@ -14,15 +15,17 @@ const Navbar = ({products}) => {
     navigate('/Cart');
   };
 
-  const [searchQuery, setSearchQuery] = useState('');
   const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
+    const dat = event.target.value;
+    console.log(dat);
   };
 
-  // Filter products based on search query
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const location = useLocation();
+  const isSearchVisible =
+    location.pathname !== '/' &&
+    location.pathname !== '/Cart' &&
+    location.pathname !== '/register' &&
+    location.pathname !== '/Login';
 
   return (
     <div className="navbar w-full">
@@ -44,30 +47,11 @@ const Navbar = ({products}) => {
               <p className="font-serif hover:border-b-2 hover:delay-75">Shoes</p>
             </Link>
           </div>
-          <div className="icon flex gap-10">
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={handleSearchInputChange}
-                placeholder="Search products"
-                className="border px-3 py-1 rounded-lg"
-              />
-              {searchQuery && (
-                <ul className="absolute top-8 left-0 z-10 bg-white border rounded-lg mt-1">
-                  {filteredProducts.map((product) => (
-                    <li key={product.id}>
-                      <Link to={`/product/${product.id}`}>
-                        {product.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <BsPersonCircle onClick={redirectToLogin} size={22} className="pointer" />
-            <FaShoppingCart onClick={redirectToCart} size={22} className="pointer" />
+          <div className=' flex gap-6'>
+          <BsPersonCircle onClick={redirectToLogin} size={22} className="pointer" />
+          <FaShoppingCart onClick={redirectToCart} size={22} className="pointer" />
           </div>
+  
         </div>
       </div>
     </div>
