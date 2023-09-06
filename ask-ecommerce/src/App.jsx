@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import { CartProvider } from '../hooks/cartContext';
 
 const App = () => {
+  
   return (
     <CartProvider>
    <BrowserRouter>

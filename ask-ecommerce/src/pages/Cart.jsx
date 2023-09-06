@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../../hooks/cartContext';
 import Navbar from '../component/Navbar'
 import { Link } from 'react-router-dom';
+import {AiOutlineDelete} from "react-icons/ai"
 
 const CartPage = () => {
     const { cart, removeFromCart } = useCart();
@@ -44,12 +45,12 @@ const CartPage = () => {
         <div>
             <Navbar />
             <div className=' mt-40 fll'>
-                <h1>Your Cart</h1>
+                <h3 className=' text-2xl lg:text-base font-bold'>Your Cart</h3>
                 {isEmpty ? (
-                    <div>
+                    <div className=' mt-6 lg:mt-4'>
                         <p>Cart is empty. Buy a product to add items to your cart.</p>
                         <Link to="/Products">
-                            <button>Buy a Product</button>
+                            <button className=' mt-4 lg:mt-2 py-2 px-3 bg-black rounded-md text-white'>Buy a Product</button>
                         </Link>
                     </div>
                 ) : (
@@ -57,26 +58,35 @@ const CartPage = () => {
                         <ul>
                             {cart.map((item) => (
                                 <li key={item.id}>
-                                    <div className=' flex '>
-                                        <div className=' flex'>
-                                        <img src={item.Image} alt={item.name} className=' w-36 h-36' />
-                                        <h3 className=''>{item.name}</h3>
-                                        <p>Price: ${item.price.toFixed(2)}</p>
+                                    <div className=' flex justify-around  text-center border-t border-teal-600 mt-4 pt-8 pb-5'>
+                                        <div className=' flex '>
+                                            <img src={item.Image} alt={item.name} className=' w-24 h-34' />
+                                            <div className=' ml-6 mt-7'>
+                                                <h3 className=' text-lg'>{item.name}</h3>
+                                                <p className=' text-base '>Price: ${item.price.toFixed(2)}</p>
+                                            </div>
+
+                                        </div>
+                                        <div className='flex gap-5'>
+                                            <div className=' mt-7 flex gap-7 flex-row  border border-teal-600 px-7'>
+                                                <button onClick={() => handleDecrement(item.id)} className=' bg-transparent text-lg'>-</button>
+                                                <p className=' text-sm px-4 pt-6'>{quantity[item.id] || 1}</p>
+                                                <button onClick={() => handleIncrement(item.id)} className=' bg-transparent text-lg'>+</button>
+                                            </div>
+                                            <button onClick={() => handleRemoveCart(item.id)}><AiOutlineDelete className=' text-2xl mt-7'/></button>
                                         </div>
 
-                                        <div>
-                                            <button onClick={() => handleDecrement(item.id)}>-</button>
-                                            <span>{quantity[item.id] || 1}</span>
-                                            <button onClick={() => handleIncrement(item.id)}>+</button>
-                                        </div>
-                                        <p>Total Price: ${(item.price * (quantity[item.id] || 1)).toFixed(2)}</p>
+                                        <p className=' mt-10'> ${(item.price * (quantity[item.id] || 1)).toFixed(2)}</p>
                                     </div>
-                                    <button onClick={() => handleRemoveCart(item.id)}>Remove from Cart</button>
+
                                 </li>
                             ))}
                         </ul>
-                        <p>Final Price for All Products: ${calculateTotalPrice()}</p>
-                        <button>Checkout</button>
+                        <div className=' float-right mt-7 mr-9 mb-8'>
+                        <p>Total price: ${calculateTotalPrice()}</p>
+                        <button className=' mt-4 bg-black rounded px-7 py-4 text-white font-semibold'>Checkout</button>
+                        </div>
+                        
                     </div>
                 )}
             </div>

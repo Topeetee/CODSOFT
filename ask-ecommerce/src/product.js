@@ -11,7 +11,7 @@ const products = [
       id: 2,
       name: 'Product 2',
       price: 29.99,
-      description: 'Vestibulum rhoncus eros ut libero vehicula, non posuere lorem placerat.',
+      description: 'Vestibulum rhoncus eros ut libero vehicula, non posueret.',
       Image: "/image-placeholder.jpg"
     },
     {

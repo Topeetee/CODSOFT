@@ -10,9 +10,9 @@ const ProductList = ({ cart, limit }) => {
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
-  };
+  // const addToCart = (product) => {
+  //   setCartItems([...cartItems, product]);
+  // };
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -35,17 +35,17 @@ const ProductList = ({ cart, limit }) => {
            value={searchQuery}
            onChange={handleSearchInputChange}
            placeholder="Search products"
-           className="border px-3 py-5 rounded-lg outline-none w-96"
+           className="border px-3 py-5 rounded-lg outline-none w-96 sm:w-52 sm:py-2"
          />
        </div>
       )}
-      <div className='flex flex-row flex-wrap '>
+      <div className='flex flex-row flex-wrap lg:flex-wrap  lg:flex-shrink sm:flex-wrap'>
       {isThereProduct ? (
             displayedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} addToCart={addToCart} />
+              <ProductCard key={product.id} product={product}  />
             ))
           ) : (
-            <p className=' mt-11  text-8xl'>No products match your search.</p>
+            <p className=' mt-11  text-8xl sm:text-sm'>No products match your search.</p>
           )}
     
       </div>
