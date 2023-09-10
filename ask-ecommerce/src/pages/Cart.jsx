@@ -73,7 +73,7 @@ const CartPage = () => {
                                                 <p className=' text-sm px-4 pt-6'>{quantity[item.id] || 1}</p>
                                                 <button onClick={() => handleIncrement(item.id)} className=' bg-transparent text-lg'>+</button>
                                             </div>
-                                            <button onClick={() => handleRemoveCart(item.id)}><AiOutlineDelete className=' text-2xl mt-7'/></button>
+                                            <button onClick={() => handleRemoveCart(item.id)}><AiOutlineDelete className=' text-2xl mt-7 bg-none'/></button>
                                         </div>
 
                                         <p className=' mt-10'> ${(item.price * (quantity[item.id] || 1)).toFixed(2)}</p>
