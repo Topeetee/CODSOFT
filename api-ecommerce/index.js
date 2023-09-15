@@ -1,51 +1,59 @@
 const express = require("express");
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require('cors');
 
-// dont forget to install dotenv package
-
-
-require('dotenv').config(); 
-const mongoose = require ("mongoose");
-const Error = require("./utils/error");
-const cartRoute =  require("./routes/cart")
-const productsRoute =  require("./routes/products")
-const orderRoute =  require("./routes/order")
-const userRoute =  require("./routes/user")
-const authRoute = require("./routes/auth")
+// Load environment variables from a .env file
+dotenv.config();
 
 const app = express();
-const connect = async()=>{
-    try{
-        await mongoose.connect(process.env.ATLAS_URI);
-        console.log("connected to my mongoDb")
-    }catch(err){
-        throw err;
-    }
-}
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function () {
-    console.log("Connected successfully");
+
+// Connect to MongoDB
+mongoose.connect(process.env.ATLAS_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB successfully");
+});
+
+// Middleware
 app.use(express.json());
-
 app.use(cookieParser());
+
+
+// Routes
+const authRoute = require("./routes/auth");
+const cartRoute = require("./routes/cart");
+const productsRoute = require("./routes/products");
+const orderRoute = require("./routes/order");
+const userRoute = require("./routes/user");
+
+app.use(cors());
 app.use("/api/auth", authRoute);
-app.use("/api/cart",cartRoute)
-app.use("/api/products",productsRoute)
-app.use("/api/order",orderRoute)
-app.use("/api/user",userRoute)
+app.use("/api/cart", cartRoute);
+app.use("/api/products", productsRoute);
+app.use("/api/order", orderRoute);
+app.use("/api/user", userRoute);
 
-app.use((err,res,next)=>{
-    const errorStatus = err.status || 500
-    const errorMessage = err.message || "something went wrong"
-    return res.status(errorStatus).json({
-        success:false,
-        status:errorStatus,
-        messgae: errorMessage,
-        stack: err.stack
-      })
-})
+// Error handling middleware
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
 
-app.listen(3000, ()=>{ connect() 
-    console.log("connected to the port")});
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

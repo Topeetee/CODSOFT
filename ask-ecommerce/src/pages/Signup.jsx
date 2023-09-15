@@ -21,13 +21,29 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Implement the signup logic and API request here
-      navigate("./Login.jsx")
+      const response = await fetch('http://localhost:3000/api/auth/signup', { 
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        // Navigate to the login page
+        console.log(response)
+        navigate('/Login');
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || 'An error occurred during signup');
+        console.log(response)
+      }
     } catch (error) {
-        setErrorMessage(error.message);
+      console.error('Login error:', error);
+      setErrorMessage('An error occurred during signup');
     }
   };
-
+  
   return (
     <div>
       <Navbar />

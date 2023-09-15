@@ -16,24 +16,28 @@ const Login = () => {
       [name]: value,
     });
   };
+
   const [errorMessage, setErrorMessage] = useState('');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/login', {
+      const response = await fetch('/api/auth/login', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
-        navigate('./order.jsx');
+        navigate('/Order');
       } else {
-        setErrorMessage(error.message);
+        setErrorMessage('Invalid username or password');
       }
     } catch (error) {
-      setErrorMessage(error.message);
+      console.error('Login error:', error);
+      setErrorMessage('An error occurred during login');
     }
   };
 
