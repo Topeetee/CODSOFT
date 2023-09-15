@@ -21,7 +21,7 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/auth/signup', { 
+      const response = await fetch('http://localhost:8080/api/auth/signup', { 
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -29,14 +29,17 @@ const Signup = () => {
         body: JSON.stringify(formData),
       });
   
+      console.log('Response Status:', response.status);
+  
       if (response.ok) {
+        const responseData = await response.json();
+        console.log('Response Data:', responseData);
         // Navigate to the login page
-        console.log(response)
         navigate('/Login');
       } else {
         const errorData = await response.json();
+        console.log('Error Data:', errorData);
         setErrorMessage(errorData.message || 'An error occurred during signup');
-        console.log(response)
       }
     } catch (error) {
       console.error('Login error:', error);

@@ -84,7 +84,8 @@ const CartPage = () => {
                         </ul>
                         <div className=' float-right mt-7 mr-9 mb-8'>
                         <p>Total price: ${calculateTotalPrice()}</p>
-                        <button className=' mt-4 bg-black rounded px-7 py-4 text-white font-semibold'>Checkout</button>
+                        
+                        <Link to="/Order"><button className=' mt-4 bg-black rounded px-7 py-4 text-white font-semibold'>Checkout</button></Link>
                         </div>
                         
                     </div>

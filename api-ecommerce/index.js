@@ -34,6 +34,9 @@ const orderRoute = require("./routes/order");
 const userRoute = require("./routes/user");
 
 app.use(cors());
+app.get("/", (req, res) => {
+  res.status(200).send("working");
+});
 app.use("/api/auth", authRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/products", productsRoute);
@@ -52,7 +55,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -7,38 +7,40 @@ require('dotenv').config();
 
 
 const authSign = async (req, res, next) => {
-
-    try {
-        var hash = bcrypt.hashSync(req.body.password, 10);
-        if (!validator.validate(req.body.email)) {
-          return res.status(400).json({
-            error: 'Invalid email address',
-          });
-        }
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: hash,
-        })
-        const userAlreadyExist = User.findOne(newUser)
-        if (userAlreadyExist){
-          res.status(400).json("user already exists")
-        }
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        // Perform password validation using the regex pattern
-        if (!req.body.password || !passwordRegex.test(req.body.password)) {
-            return res.status(400).json({
-                error:
-                    'Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character',
-            });
-        }
-        await newUser.save();
-        res.status(200).json("user has been created");
-    } catch (err) {
-        next(err)
+  try {
+    var hash = bcrypt.hashSync(req.body.password, 10);
+    if (!validator.validate(req.body.email)) {
+      return res.status(400).json({
+        error: 'Invalid email address',
+      });
     }
-}
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hash,
+    });
+
+    const userAlreadyExist = await User.findOne({ email: req.body.email });
+
+    if (userAlreadyExist) {
+      return res.status(400).json("User already exists");
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    // Perform password validation using the regex pattern
+    if (!req.body.password || !passwordRegex.test(req.body.password)) {
+      return res.status(400).json({
+        error:
+          'Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character',
+      });
+    }
+    await newUser.save();
+    res.status(200).json("User has been created");
+  } catch (err) {
+    next(err);
+  }
+};
 
 
 const authLogin = async (req, res, next) => {
