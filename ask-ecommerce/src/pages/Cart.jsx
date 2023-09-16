@@ -3,8 +3,10 @@ import { useCart } from '../../hooks/cartContext';
 import Navbar from '../component/Navbar'
 import { Link } from 'react-router-dom';
 import {AiOutlineDelete} from "react-icons/ai"
+import { useNavigate } from 'react-router-dom'; 
 
 const CartPage = () => {
+    const navigate = useNavigate()
     const { cart, removeFromCart } = useCart();
     const [quantity, setQuantity] = useState({}); // State to store quantity for each product
 
@@ -40,6 +42,30 @@ const CartPage = () => {
         });
         return totalPrice.toFixed(2);
     };
+    const handleCheckout = () => {
+        // Create a JSON object with cart details
+        const checkoutData = {
+            cart,
+            quantity,
+            totalPrice: calculateTotalPrice(),
+        };
+
+        // Make a POST request to send checkout data to the server
+        fetch('http://localhost:8080/api/cart/addToCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(checkoutData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                navigate("/Order")
+            })
+            .catch((error) => {
+                console.error('Error during checkout:', error);
+            });
+        };
 
     return (
         <div>
@@ -85,7 +111,7 @@ const CartPage = () => {
                         <div className=' float-right mt-7 mr-9 mb-8'>
                         <p>Total price: ${calculateTotalPrice()}</p>
                         
-                        <Link to="/Order"><button className=' mt-4 bg-black rounded px-7 py-4 text-white font-semibold'>Checkout</button></Link>
+                        <Link to="/Order"><button className=' mt-4 bg-black rounded px-7 py-4 text-white font-semibold' onClick={handleCheckout}>Checkout</button></Link>
                         </div>
                         
                     </div>

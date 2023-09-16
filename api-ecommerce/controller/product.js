@@ -20,12 +20,9 @@ const createProduct = async(req,res,next)=>{
     return res.status(400).json({ error: 'No image file uploaded' });
   }
     const newProduct = new Product({
-      title: req.body.title,
+      name: req.body.name,
       desc: req.body.desc,
       img: req.files.img[0].path,
-      categories: req.body.categories,
-      size: req.body.size,
-      color: req.body.color,
       price: req.body.price,
     });
   
@@ -47,10 +44,7 @@ const updateProduct = async (req, res, next) => {
     const updatedFields = {
       title: req.body.title,
       desc: req.body.desc,
-      img: req.files.img[0].path, // Update the image path
-      categories: req.body.categories,
-      size: req.body.size,
-      color: req.body.color,
+      img: req.files.img[0].path, 
       price: req.body.price,
     };
 

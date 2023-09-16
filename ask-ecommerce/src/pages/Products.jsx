@@ -5,16 +5,6 @@ import products from '../product'
 
 
 const Products = () => {
- 
-  // const [searchQuery, setSearchQuery] = useState('');
-
-  // const handleSearchInputChange = (event) => {
-  //   setSearchQuery(event.target.value);
-  // };
-
-  // const filteredProducts = products.filter((product) =>
-  //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
   return (
     <div className='  fll scroll-smooth '>
       <div>
