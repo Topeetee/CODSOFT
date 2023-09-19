@@ -7,7 +7,7 @@ const Order = () => {
 
   // Use the useEffect hook to fetch order data when the component mounts
   useEffect(() => {
-    fetch('http://localhost:8080/api/order', {
+    fetch('http://localhost:8080/api/order/getOrders', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Order = () => {
             <p>Address: {orderData.address}</p>
             <h3>Products:</h3>
             <ul>
-              {orderData.products.map((product, index) => (
+              {orderData?.products?.map((product, index) => (
                 <li key={index}>
                   Product ID: {product.productId}, Quantity: {product.quantity}
                 </li>

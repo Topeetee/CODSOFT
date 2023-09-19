@@ -14,7 +14,7 @@ const ProductList = ({ limit }) => {
   const fetchData = async () => {
     setIsLoading(true); 
     try {
-      const response = await fetch('/api/products'); 
+      const response = await fetch('http://localhost:8080/api/products'); 
       if (response.ok) {
         const result = await response.json();
         setProducts(result);
@@ -34,7 +34,7 @@ const ProductList = ({ limit }) => {
   };
 
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  product.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const displayedProducts = limit ? filteredProducts.slice(0, limit) : filteredProducts;
